@@ -1,9 +1,11 @@
-import Koa from 'koa'
-const app = new Koa()
-app.use(async ctx => {
-  ctx.body = 'Hello world'
-})
+import Koa from "koa";
+const app = new Koa();
+const port = 3000;
 
-app.listen(3000, () => { console.log('im workinggggggg!!!!!')})
+app.use(async (ctx) => {
+  ctx.body = "Hello world";
+});
 
-
+app.listen(port, () => {
+  console.log(`🚀 Server listening ${port} 🍟 🚀`);
+});

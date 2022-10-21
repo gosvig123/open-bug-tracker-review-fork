@@ -10,6 +10,8 @@
     "@types/node": "^16.11.68",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
+    "koa": "^2.13.4",
+    "nodemon": "^2.0.20",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -17,12 +19,14 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "dev": "nodemon ./server/index.ts",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
+    "parserOptions": {"tracker" : "./tsconfig.json"},
     "extends": [
       "react-app",
       "react-app/jest"
@@ -39,5 +43,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/koa": "^2.13.5"
   }
 }

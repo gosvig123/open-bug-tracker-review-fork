@@ -1,0 +1,33 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Occurrences{
+  occurence_id        Int     @id @default(autoincrement())
+  bug_id     String           @default(uuid())
+  project_id        Int       
+  }
+
+model Bugs{
+  bug_id        String       @id @default(uuid())
+  project_id        Int      
+  message       String
+  stack_trace    String
+  num_occurences    Int
+  first_seen   DateTime
+  last_seen    DateTime
+  solved_at    DateTime
+}
+
+model Project{
+  prjoect_id        Int      @id @default(autoincrement())
+  name        String
+}

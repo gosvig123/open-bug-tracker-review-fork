@@ -4,10 +4,12 @@
   "private": true,
   "dependencies": {
     "@koa/cors": "^4.0.0",
+    "@prisma/client": "4.5.0",
     "koa": "^2.13.4",
     "koa-bodyparser": "^4.3.0",
     "koa-router": "^12.0.0",
     "nodemon": "^2.0.20",
+    "prisma": "^4.5.0",
     "ts-node": "^10.9.1"
   },
   "scripts": {
@@ -19,12 +21,12 @@
     }
   },
   "devDependencies": {
-    "@types/koa-bodyparser": "^4.3.8",
     "@types/jest": "^27.5.2",
     "@types/koa": "^2.13.5",
+    "@types/koa-bodyparser": "^4.3.8",
     "@types/koa-router": "^7.4.4",
     "@types/koa__cors": "^3.3.0",
-    "@types/node": "^16.11.68",
+    "@types/node": "^18.11.4",
     "typescript": "^4.8.4"
   }
 }

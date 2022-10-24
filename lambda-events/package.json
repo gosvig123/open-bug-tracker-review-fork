@@ -1,0 +1,12 @@
+{
+  "name": "lambda-events",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "serverless": "^3.23.0"
+  },
+  "scripts": {
+    "locally": "node -e \"console.log(require('./handler.js').handler(require('./event.json')));\""
+  }
+}

@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import FormProject from "../components/newProject";
+import { APIprojects } from "../lib/api";
 
 const projects: NextPage = () => {
   return (

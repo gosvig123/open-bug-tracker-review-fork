@@ -10,8 +10,28 @@ function handler(req: NextApiRequest, res: NextApiResponse<Data>): void {
   res.status(200).json({ name: "John Doe" });
 }
 
-export const api = axios.create({
+const api = axios.create({
   baseURL: "http://localhost:3000",
 });
 
-export { handler };
+const APIprojects = {
+  async postProjects(project: string) {
+    try {
+      return await api.post("/projects", {
+        name: project,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  async getProjects() {
+    try {
+      return await api.get("/projects");
+    } catch (error) {
+      console.log(error);
+    }
+  },
+};
+
+export { handler, api, APIprojects };

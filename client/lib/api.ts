@@ -11,8 +11,15 @@ function handler(req: NextApiRequest, res: NextApiResponse<Data>): void {
 }
 
 const api = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "http://localhost:3001",
 });
+
+interface Project {
+  id: number;
+  name: string;
+  bugs_count_active: number;
+  bugs_count_total: number;
+}
 
 const APIprojects = {
   async postProjects(project: string) {
@@ -27,7 +34,7 @@ const APIprojects = {
 
   async getProjects() {
     try {
-      return await api.get("/projects");
+      return await api.get<Project[]>("/projects");
     } catch (error) {
       console.log(error);
     }

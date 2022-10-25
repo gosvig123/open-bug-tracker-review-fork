@@ -8,7 +8,7 @@ import { PrismaClient } from "@prisma/client";
 const app = new Koa();
 const port = 3000;
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 const router = new Router();
 app.use(cors());

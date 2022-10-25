@@ -31,7 +31,6 @@ const APIprojects = {
       console.log(error);
     }
   },
-
   async getProjects() {
     try {
       return await api.get<Project[]>("/projects");

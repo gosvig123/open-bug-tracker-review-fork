@@ -27,19 +27,18 @@ function Projects(): JSX.Element {
   return (
     <div>
       <FormProject> HI there </FormProject>
-      {listProjects && (
-        <li>
-          {listProjects.map((project: { id: Key | null | undefined }) => {
-            return (
-              <div key={project.id}>
-                <a>project.name</a>
-                <a>project.bugs_count_active</a>
-                <a>project.bugs_count_total</a>
-              </div>
-            );
-          })}
-        </li>
-      )}
+
+      <li>
+        {listProjects.map((project: { id: Key | null | undefined }) => {
+          return (
+            <div key={project.id}>
+              <a>project.name</a>
+              <a>project.bugs_count_active</a>
+              <a>project.bugs_count_total</a>
+            </div>
+          );
+        })}
+      </li>
     </div>
   );
 }

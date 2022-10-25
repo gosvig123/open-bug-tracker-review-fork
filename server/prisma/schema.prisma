@@ -10,12 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Occurrences{
-  occurence_id        Int     @id @default(autoincrement())
-  bug_id     String           @default(uuid())
-  project_id        Int       
-  }
-
 model Bugs{
   bug_id        String       @id @default(uuid())
   project_id        Int      

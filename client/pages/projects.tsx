@@ -1,5 +1,4 @@
-import { AxiosResponse } from "axios";
-import type { NextPage } from "next";
+import Link from "next/link";
 import { Key, ReactNode, useEffect, useState } from "react";
 import FormProject from "../components/newProject";
 import { APIprojects } from "../lib/api";
@@ -36,7 +35,7 @@ function Projects(): JSX.Element {
         (project: { [x: string]: ReactNode; id: Key | null | undefined }) => {
           return (
             <ul key={project.id}>
-              <a> {project.name}</a>
+              <Link href={`/projects/${project.id}`}>{project.name}</Link>
               <a> {project.bugs_count_active}</a>
               <a> {project.bugs_count_total}</a>
             </ul>

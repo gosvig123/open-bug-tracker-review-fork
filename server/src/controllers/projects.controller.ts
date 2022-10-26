@@ -26,19 +26,19 @@ const ProjectController = {
     }
   },
 
-  // async getProject(ctx: Koa.Context) {
-  //   try {
-  //     const body = ctx.request.body;
-  //     if (body === undefined || typeof body.id !== 'number') {
-  //       throw new Error("no project name");
-  //     }
-
-  //     const project = await Project.getProjects(body.id)
-  //     ctx.response.body = { project };
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // },
+  async getProject(ctx: Koa.Context) {
+    try {
+      const id = parseInt(ctx.params.id);
+      if (id === undefined) {
+        throw new Error("no project name");
+      }
+      console.log(id);
+      const result = await Project.getProject(id);
+      ctx.response.body = result;
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };
 
 export default ProjectController;

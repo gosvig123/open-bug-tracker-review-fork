@@ -18,6 +18,7 @@ app.use(bodyParser());
 router.post("/events", EventsController.createEvent);
 router.post("/projects", ProjectController.createProject);
 router.get("/projects", ProjectController.getProjects);
+router.get("/project/:id", ProjectController.getProject);
 
 app.listen(port, () => {
   console.log(`🚀 Server listening ${port} 🍟 🚀`);

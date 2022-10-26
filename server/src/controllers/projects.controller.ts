@@ -1,18 +1,21 @@
 import Koa from "koa";
+import Project from "../models/Projects";
 
 const ProjectController = {
   async createProject(ctx: Koa.Context, next: Koa.Next) {
     try {
-      const name = ctx.request.body;
-      console.log("in project controller. ");
-      //const project = await Project.create(name)
-      ctx.response.body = name;
+      const body = ctx.request.body;
+      if (body === undefined || typeof body.name !== "string") {
+        throw new Error("no project name");
+      }
+
+      const project = await Project.create(body.name);
+      ctx.response.body = project;
       ctx.response.status = 201;
     } catch (error) {
       console.log(error);
     }
   },
-  // ,
 
   async getProject(ctx: Koa.Context) {
     //const project = await Project.getProjects()

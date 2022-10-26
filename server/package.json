@@ -14,7 +14,7 @@
     "ts-node": "^10.9.1"
   },
   "scripts": {
-    "dev": "ts-node-dev src/index.ts",
+    "dev": "nodemon src/index.ts",
     "build": "tsc --build",
     "db:setup": "prisma migrate deploy",
     "start:prod": "yarn db:setup && node dist/index.js",

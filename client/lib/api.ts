@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import type { NextApiRequest, NextApiResponse } from "next";
+import { config } from "process";
 
 interface Data {
   name: string;
@@ -34,6 +35,13 @@ const APIprojects = {
   async getProjects() {
     try {
       return await api.get<Project[]>("/projects");
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  async getProject(id: string) {
+    try {
+      return await api.get<Project>(`/project/${id}`);
     } catch (error) {
       console.log(error);
     }

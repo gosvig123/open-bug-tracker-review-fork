@@ -16,13 +16,21 @@ const EventsController = {
 
       let bug = await prisma.bugs.findUnique({
         where: {
-          message: event.message,
+          project_message: {
+            message: event.message,
+            project_id: event.project_id,
+          },
         },
       });
 
       if (bug) {
         bug = await prisma.bugs.update({
-          where: { message: bug.message },
+          where: {
+            project_message: {
+              message: bug.message,
+              project_id: event.project_id,
+            },
+          },
           data: {
             num_occurences: bug.num_occurences + 1,
             last_seen: new Date().toISOString(),
@@ -31,7 +39,9 @@ const EventsController = {
       } else {
         bug = await prisma.bugs.create({
           data: {
-            project_id: event.project_id,
+            project: {
+              connect: { id: event.project_id },
+            },
             message: event.message,
             stack_trace: event.stack_trace,
             num_occurences: 1,

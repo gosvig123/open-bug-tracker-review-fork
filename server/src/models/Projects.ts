@@ -14,25 +14,30 @@ class Project {
   }
 
   static async getProjects(): Promise<any> {
-    let projects = await prisma.project.findMany({});
+    const projects = await prisma.project.findMany();
 
-    const addDetailsToProject =()=> 
-
-    return await Promise.all(projects.map(async (project) => {
+    const getActiveBugsOnProject = (project: Project): Promise<number> => {
+      return prisma.bugs.count({
+        where: { project_id: project.id, solved_at: null },
+      });
+    };
+    const getTotalBugsOnProject = (project: Project): Promise<number> => {
+      return prisma.bugs.count({
+        where: { project_id: project.id },
+      });
+    };
+    const projectInfoPromises = projects.map(async (project) => {
       return {
         ...project,
-        bugs_count_active: await prisma.bugs.count({
-          where: {
-            project_id: project.id,
-          },
-        }),
+        bugs_count_active: await getActiveBugsOnProject(project),
+        bugs_count_total: await getTotalBugsOnProject(project),
       };
-    }));
+    });
+    const masterPromise = Promise.all(projectInfoPromises);
+    return await masterPromise;
   }
 
   // static async getProject(id: number): Promise<any> {
-
-  // }
 }
 
 export default Project;

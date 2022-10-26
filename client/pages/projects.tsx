@@ -29,7 +29,7 @@ function Projects(): JSX.Element {
       <FormProject> HI there </FormProject>
 
       <li>
-        {listProjects.map((project: { id: Key | null | undefined }) => {
+        {/* {listProjects.map((project: { id: Key | null | undefined }) => {
           return (
             <div key={project.id}>
               <a>project.name</a>
@@ -37,7 +37,7 @@ function Projects(): JSX.Element {
               <a>project.bugs_count_total</a>
             </div>
           );
-        })}
+        })} */}
       </li>
     </div>
   );

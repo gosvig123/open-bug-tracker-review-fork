@@ -50,6 +50,7 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: qwerty
+      MONGO_INITDB_DATABASE: bugtracker
     volumes:
       - mongodb:/data/db
       - mongodb_config:/data/configdb

@@ -29,6 +29,3 @@ app.on("error", async (err, ctx: Koa.Context, next: Koa.Next) => {
 });
 
 app.use(router.routes());
-
-//hi
-// POST localhost:3000/events

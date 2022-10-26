@@ -20,7 +20,7 @@ const ProjectController = {
   async getProjects(ctx: Koa.Context) {
     try {
       const projects = await Project.getProjects();
-      ctx.response.body = { projects };
+      ctx.response.body = projects;
     } catch (error) {
       console.log(error);
     }

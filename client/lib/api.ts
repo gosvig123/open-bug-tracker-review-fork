@@ -11,7 +11,7 @@ function handler(req: NextApiRequest, res: NextApiResponse<Data>): void {
 }
 
 const api = axios.create({
-  baseURL: "http://localhost:3001",
+  baseURL: "http://localhost:8080",
 });
 
 interface Project {
@@ -31,7 +31,6 @@ const APIprojects = {
       console.log(error);
     }
   },
-
   async getProjects() {
     try {
       return await api.get<Project[]>("/projects");

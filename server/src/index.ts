@@ -3,27 +3,34 @@ import Router from "koa-router";
 import bodyParser from "koa-bodyparser";
 import cors from "@koa/cors";
 
-import { PrismaClient } from "@prisma/client";
+import EventsController from "./controllers/events.controller";
+import ProjectController from "./controllers/projects.controller";
+import { Context } from "vm";
+import { nextTick } from "process";
 
 const app = new Koa();
 const port = 3000;
-
-const prisma = new PrismaClient();
 
 const router = new Router();
 app.use(cors());
 app.use(bodyParser());
 
-router.post("/events", async (ctx: Koa.Context, next: Koa.Next) => {
-  ctx.body = ctx.request.body;
-  console.log(ctx.body);
-  await next();
+router.post("/events", EventsController.createEvent);
+router.post("/projects", ProjectController.createProject);
+router.get("/projects", () => {
+  console.log("hi");
 });
 
 app.listen(port, () => {
   console.log(`🚀 Server listening ${port} 🍟 🚀`);
 });
 
+app.on("error", async (err, ctx: Koa.Context, next: Koa.Next) => {
+  console.log(err);
+  await next();
+});
+
 app.use(router.routes());
 
+//hi
 // POST localhost:3000/events

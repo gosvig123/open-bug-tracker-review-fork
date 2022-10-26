@@ -3,6 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-arm64-openssl-1.1.x"]
 }
 
 datasource db {
@@ -10,18 +11,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Bugs{
-  bug_id        String       @id @default(uuid())
-  project_id        Int      
-  message       String
+model Bugs {
+  bug_id         String   @id @default(uuid())
+  project_id     Int
+  message        String   @unique
   stack_trace    String
-  num_occurences    Int
-  first_seen   DateTime
-  last_seen    DateTime
-  solved_at    DateTime
+  num_occurences Int
+  first_seen     DateTime
+  last_seen      DateTime
+  solved_at      DateTime?
 }
 
-model Project{
-  prjoect_id        Int      @id @default(autoincrement())
-  name        String
+model Project {
+  prjoect_id Int    @id @default(autoincrement())
+  name       String
 }

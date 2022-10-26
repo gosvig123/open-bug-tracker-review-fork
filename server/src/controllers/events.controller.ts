@@ -31,7 +31,9 @@ const EventsController = {
       } else {
         bug = await prisma.bugs.create({
           data: {
-            project_id: event.project_id,
+            project: {
+              connect: { id: event.project_id },
+            },
             message: event.message,
             stack_trace: event.stack_trace,
             num_occurences: 1,

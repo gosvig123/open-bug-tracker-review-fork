@@ -13,7 +13,8 @@ datasource db {
 
 model Bugs {
   bug_id         String   @id @default(uuid())
-  project_id     Int
+  project_id     Int      
+  project        Project  @relation(fields: [project_id], references: [id])
   message        String   @unique
   stack_trace    String
   num_occurences Int
@@ -23,6 +24,7 @@ model Bugs {
 }
 
 model Project {
-  prjoect_id Int    @id @default(autoincrement())
+  id         Int    @id @default(autoincrement())
   name       String
+  bugs       Bugs[]
 }

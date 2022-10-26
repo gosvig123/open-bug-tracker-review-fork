@@ -17,10 +17,28 @@ const ProjectController = {
     }
   },
 
-  async getProject(ctx: Koa.Context) {
-    //const project = await Project.getProjects()
-    ctx.response.body = {};
+  async getProjects(ctx: Koa.Context) {
+    try {
+      const projects = await Project.getProjects();
+      ctx.response.body = { projects };
+    } catch (error) {
+      console.log(error);
+    }
   },
+
+  // async getProject(ctx: Koa.Context) {
+  //   try {
+  //     const body = ctx.request.body;
+  //     if (body === undefined || typeof body.id !== 'number') {
+  //       throw new Error("no project name");
+  //     }
+
+  //     const project = await Project.getProjects(body.id)
+  //     ctx.response.body = { project };
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // },
 };
 
 export default ProjectController;

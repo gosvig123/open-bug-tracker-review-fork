@@ -17,3 +17,9 @@ jobs:
         run: yarn
       - name: Build
         run: yarn build
+      - name: Test
+        run: yarn test
+        env:
+          DATABASE_URL: postgres://dummy
+          MONGO_URL: mongodb://dummy
+          PORT: 8080

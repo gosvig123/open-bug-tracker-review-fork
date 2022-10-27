@@ -3,13 +3,17 @@ import Router from "koa-router";
 import bodyParser from "koa-bodyparser";
 import cors from "@koa/cors";
 
+import dotenv from "dotenv";
+dotenv.config();
+
 import EventsController from "./controllers/events.controller";
 import ProjectController from "./controllers/projects.controller";
 import { Context } from "vm";
 import { nextTick } from "process";
+import BugsController from "./controllers/bugs.controller";
 
 const app = new Koa();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const router = new Router();
 app.use(cors());
@@ -20,6 +24,8 @@ router.post("/projects", ProjectController.createProject);
 router.get("/projects", () => {
   console.log("hi");
 });
+router.get("/bugs/:id", BugsController.getBug);
+router.put("/bugs/:id/solve", BugsController.updateBug);
 
 app.listen(port, () => {
   console.log(`🚀 Server listening ${port} 🍟 🚀`);

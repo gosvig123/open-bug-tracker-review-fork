@@ -1,6 +1,5 @@
-import { AxiosResponse } from "axios";
-import type { NextPage } from "next";
-import { Key, useEffect, useState } from "react";
+import Link from "next/link";
+import { Key, ReactNode, useEffect, useState } from "react";
 import FormProject from "../components/newProject";
 import { APIprojects } from "../lib/api";
 
@@ -12,12 +11,16 @@ interface Project {
 }
 
 function Projects(): JSX.Element {
-  const [listProjects, setListProjects] = useState<Project[] | any>([]);
+  const [listProjects, setListProjects] = useState<any>([]);
 
   const getProjects = async function () {
     const result = await APIprojects.getProjects();
+    const projects = result?.data;
+    setListProjects(projects);
+  };
 
-    setListProjects(result);
+  const createProject = async function (project: string) {
+    await APIprojects.postProjects(project);
   };
 
   useEffect(() => {
@@ -26,20 +29,21 @@ function Projects(): JSX.Element {
 
   return (
     <div>
-      <FormProject> HI there </FormProject>
+      <FormProject onSubmit={createProject}> Hi there </FormProject>
 
-      <li>
-        hello
-        {listProjects.map((project: { id: Key | null | undefined }) => {
+
+      {listProjects.map(
+        (project: { [x: string]: ReactNode; id: Key | null | undefined }) => {
+ 
           return (
-            <div key={project.id}>
-              <a>project.name</a>
-              <a>project.bugs_count_active</a>
-              <a>project.bugs_count_total</a>
-            </div>
+            <ul key={project.id}>
+              <Link href={`/projects/${project.id}`}>{project.name}</Link>
+              <a> {project.bugs_count_active}</a>
+              <a> {project.bugs_count_total}</a>
+            </ul>
           );
-        })}
-      </li>
+        }
+      )}
     </div>
   );
 }

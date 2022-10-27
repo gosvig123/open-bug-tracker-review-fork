@@ -21,11 +21,13 @@ app.use(bodyParser());
 
 router.post("/events", EventsController.createEvent);
 router.post("/projects", ProjectController.createProject);
-router.get("/projects", () => {
-  console.log("hi");
-});
+
 router.get("/bugs/:id", BugsController.getBug);
 router.put("/bugs/:id/solve", BugsController.updateBug);
+
+router.get("/projects", ProjectController.getProjects);
+router.get("/project/:id", ProjectController.getProject);
+
 
 app.listen(port, () => {
   console.log(`🚀 Server listening ${port} 🍟 🚀`);
@@ -37,6 +39,3 @@ app.on("error", async (err, ctx: Koa.Context, next: Koa.Next) => {
 });
 
 app.use(router.routes());
-
-//hi
-// POST localhost:3000/events

@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { APIprojects } from "../../lib/api";
 
 interface FormProject {
   children: React.ReactNode[] | React.ReactNode;
+  onSubmit: (project: string) => Promise<void>;
 }
 
-export default function FormProject({ children }: FormProject): JSX.Element {
+export default function FormProject({
+  onSubmit,
+  children,
+}: FormProject): JSX.Element {
   const [project, setProject] = useState("");
 
   const handleInput = function (
@@ -18,8 +21,7 @@ export default function FormProject({ children }: FormProject): JSX.Element {
     event: React.FormEvent<HTMLFormElement>
   ): Promise<void> {
     event.preventDefault();
-    await APIprojects.postProjects(project);
-    console.log(project);
+    await onSubmit(project);
     setProject("");
   };
 
@@ -27,7 +29,7 @@ export default function FormProject({ children }: FormProject): JSX.Element {
     <div>
       {children}
       <form onSubmit={handleSubmit}>
-        <input type="text" onChange={handleInput}></input>
+        <input value={project} type="text" onChange={handleInput}></input>
         <button type="submit"> Submit</button>
       </form>
     </div>

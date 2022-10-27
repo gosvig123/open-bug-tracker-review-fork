@@ -13,16 +13,19 @@ datasource db {
 
 model Bugs {
   bug_id         String   @id @default(uuid())
-  project_id     Int
-  message        String   @unique
+  project_id     Int      
+  project        Project  @relation(fields: [project_id], references: [id])
+  message        String   
   stack_trace    String
   num_occurences Int
   first_seen     DateTime
   last_seen      DateTime
   solved_at      DateTime?
+  @@unique(fields:[project_id, message], name: "project_message")
 }
 
 model Project {
-  prjoect_id Int    @id @default(autoincrement())
+  id         Int    @id @default(autoincrement())
   name       String
+  bugs       Bugs[]
 }

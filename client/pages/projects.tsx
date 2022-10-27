@@ -31,8 +31,10 @@ function Projects(): JSX.Element {
     <div>
       <FormProject onSubmit={createProject}> Hi there </FormProject>
 
+
       {listProjects.map(
         (project: { [x: string]: ReactNode; id: Key | null | undefined }) => {
+ 
           return (
             <ul key={project.id}>
               <Link href={`/projects/${project.id}`}>{project.name}</Link>

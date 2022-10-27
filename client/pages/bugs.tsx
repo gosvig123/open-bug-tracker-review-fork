@@ -39,35 +39,30 @@ function BugDetails(): JSX.Element {
       {/* big part */}
       <Card> solved (not solved){bugDeatails.solved_at}</Card>
       <Card> bug message is {bugDeatails.message}</Card>
-      <div>
+      {/* <div>
         {bugDeatails.occurrences.map((event: { stack_trace: string }) => {
           return (
             <div key={bugDeatails.id}>
               <p> {event.stack_trace}</p>
             </div>
-          );
+          )
         })}
-      </div>
+      </div> */}
 
       {/* info panel */}
-      <p> first seen: {bugDeatails.first_seen} </p>
+      {/* <p> first seen:  {bugDeatails.first_seen} </p>
       <p> last seen: {bugDeatails.last_seen} </p>
-      <p> num_occurrences: {bugDeatails.num_occurrences} </p>
+      <p> num_occurrences: {bugDeatails.num_occurrences} </p> */}
 
       {/* chart  */}
-      {bugDeatails.occurrences.map(
-        (event: {
-          report_date: string;
-          meta_data: { user_agent: string; browser: string };
-        }) => {
-          return (
-            <div key={bugDeatails.id}>
-              <p> date is {event.report_date} </p>
-              <p> user agent is {event.meta_data.user_agent}</p>
-            </div>
-          );
-        }
-      )}
+      {/* {bugDeatails.occurrences.map((event: { report_date: string, meta_data: { user_agent: string, browser: string } }) => {
+        return (
+          <div key={bugDeatails.id}>
+            <p> date is {event.report_date} </p>
+            <p> user agent is {event.meta_data.user_agent}</p>
+          </div>
+        )
+      })} */}
     </div>
   );
 }

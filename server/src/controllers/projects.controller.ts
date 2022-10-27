@@ -32,8 +32,8 @@ const ProjectController = {
       if (id === undefined) {
         throw new Error("no project name");
       }
-      console.log(id);
       const result = await Project.getProject(id);
+      console.log(result);
       ctx.response.body = result;
     } catch (error) {
       console.log(error);

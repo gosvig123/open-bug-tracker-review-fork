@@ -29,6 +29,7 @@ function Projects(): JSX.Element {
       <FormProject> HI there </FormProject>
 
       <li>
+        hello
         {listProjects.map((project: { id: Key | null | undefined }) => {
           return (
             <div key={project.id}>

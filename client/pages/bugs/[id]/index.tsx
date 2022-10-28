@@ -44,7 +44,6 @@ function Bug(): JSX.Element {
     const occurrences = result?.data.occurrences
     setBugDetails(bug)
     setListOccurrences(occurrences)
-    console.log(occurrences)
   }
 
   return (

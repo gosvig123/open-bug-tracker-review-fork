@@ -61,6 +61,7 @@ const EventsController = {
         message: event.message,
         stack_trace: event.stack_trace,
         metadata: event.metadata,
+
       });
 
       ctx.status = 202;

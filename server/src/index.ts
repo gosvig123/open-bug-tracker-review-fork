@@ -22,14 +22,17 @@ app.use(bodyParser());
 router.post("/events", EventsController.createEvent);
 router.post("/projects", ProjectController.createProject);
 
+router.get("/bugs", BugsController.getBugs)
 router.get("/bugs/:id", BugsController.getBug);
 router.put("/bugs/:id/solve", BugsController.updateBug);
 
 router.get("/projects", ProjectController.getProjects);
 router.get("/project/:id", ProjectController.getProject);
 
+ 
 router.get("/bugs/:id/ocurrence/:id", EventsController.getEvent);
 
+ 
 app.listen(port, () => {
   console.log(`🚀 Server listening ${port} 🍟 🚀`);
 });

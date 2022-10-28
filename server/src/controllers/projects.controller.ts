@@ -39,16 +39,6 @@ const ProjectController = {
       console.log(error);
     }
   },
-
-  async getBugdetails (ctx: Koa.Context) {
-    try {
-      const id = parseInt(ctx.params.id)
-      const bug_id = 2
-      // google.com/2/jrehkjhkj31ur4tyf98dcj
-    } catch (error) {
-      console.log(error)
-    }
-  }
 };
 
 export default ProjectController;

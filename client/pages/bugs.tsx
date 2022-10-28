@@ -1,3 +1,4 @@
+
 import { Card } from "@contentful/f36-components"
 import Link from "next/link"
 import { useEffect, useState } from "react"
@@ -41,7 +42,9 @@ function BugDetails(): JSX.Element {
           </ul>
         );
       })}
-
-}
-
+ 
+    </div >
+  )
+ }
+ 
 export default BugDetails;

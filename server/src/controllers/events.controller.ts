@@ -15,7 +15,6 @@ const EventsController = {
   async createEvent(ctx: Koa.Context, next: Koa.Next) {
     try {
       const event = ctx.request.body as unknown as EventInput;
-
       let bug = await prisma.bugs.findUnique({
         where: {
           project_message: {
@@ -59,7 +58,7 @@ const EventsController = {
         project_id: event.project_id,
         bug_id: bug.bug_id,
         message: event.message,
-        stack_trace: event.stack_trace,
+        stack_trace: event.metadata.stack_trace,
         metadata: event.metadata,
       });
 

@@ -2895,6 +2895,11 @@ buffer-from@^1.0.0:
   resolved "https://registry.yarnpkg.com/buffer-from/-/buffer-from-1.1.2.tgz#2b146a6fd72e80b4f55d255f35ed59a3a9a41bd5"
   integrity sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ==
 
+bugfinder-lib@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/bugfinder-lib/-/bugfinder-lib-0.0.6.tgz#1225cd0e274234c1833b5be106323bc879be001f"
+  integrity sha512-EeRDIFQzDJP4WbjB/IDtWglqDcJ/B6Z9lfWGVsKbw7mmsqmympAxnKCX7hcLZfVbujzvGlRnP/sX9MAMdD08CQ==
+
 builtin-modules@^3.1.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/builtin-modules/-/builtin-modules-3.3.0.tgz#cae62812b89801e9656336e46223e030386be7b6"

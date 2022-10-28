@@ -23,9 +23,8 @@ function Projects(): JSX.Element {
 
   const getProjects = async function () {
     const result = await APIprojects.getProjects();
-    const projects = result?.data;
 
-    setListProjects(projects);
+    setListProjects(result);
   };
 
   const createProject = async function (project: string) {
@@ -43,7 +42,6 @@ function Projects(): JSX.Element {
       <FormProject onSubmit={createProject}> </FormProject>
       <EntityList>
         {listProjects.map((project: Project) => {
-
           return (
             // <EntityList.Item
             //   key={project.id}

@@ -70,30 +70,30 @@ class Project {
   }
 
 
-  static async getBugdetails(id: number, bug_id: string): Promise<any> {
-    const project = await prisma.project.findUniqueOrThrow({
-      where: {
-        id: id
-      }
-    })
-    const bug = await prisma.bugs.findUniqueOrThrow({
-      where: {
-        bug_id: bug_id
-      }
-    })
+  // static async getBugdetails(id: number, bug_id: string): Promise<any> {
+  //   const project = await prisma.project.findUniqueOrThrow({
+  //     where: {
+  //       id: id
+  //     }
+  //   })
+  //   const bug = await prisma.bugs.findUniqueOrThrow({
+  //     where: {
+  //       bug_id: bug_id
+  //     }
+  //   })
 
-    const occurrences = await getOccurrencesCollection()
-    const result = await occurrences.find({ bug_id: bug_id }).toArray()
+  //   const occurrences = await getOccurrencesCollection()
+  //   const result = await occurrences.find({ bug_id: bug_id }).toArray()
 
 
-    const bugDetails = {
-      ...project,
-      bug,
-      result
-    }
+  //   const bugDetails = {
+  //     ...project,
+  //     bug,
+  //     result
+  //   }
 
-    return bugDetails
-  }
+  //   return bugDetails
+  // }
 
 }
 

@@ -1,4 +1,10 @@
 import React, { useState } from "react";
+import {
+  Form,
+  FormControl,
+  TextInput,
+  Button,
+} from "@contentful/f36-components";
 
 interface FormProject {
   children: React.ReactNode[] | React.ReactNode;
@@ -9,7 +15,8 @@ export default function FormProject({
   onSubmit,
   children,
 }: FormProject): JSX.Element {
-  const [project, setProject] = useState("");
+  const [inputProject, setProject] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
   const handleInput = function (
     event: React.ChangeEvent<HTMLInputElement>
@@ -21,17 +28,38 @@ export default function FormProject({
     event: React.FormEvent<HTMLFormElement>
   ): Promise<void> {
     event.preventDefault();
-    await onSubmit(project);
-    setProject("");
+    if (inputProject) {
+      await onSubmit(inputProject);
+      setProject("");
+    }
+  };
+  const submitForm = () => {
+    setSubmitted(true);
+    setTimeout(() => {
+      setSubmitted(false);
+    }, 1000);
   };
 
   return (
     <div>
       {children}
-      <form onSubmit={handleSubmit}>
-        <input value={project} type="text" onChange={handleInput}></input>
-        <button type="submit"> Submit</button>
-      </form>
+      <Form onSubmit={handleSubmit}>
+        <FormControl>
+          <FormControl.Label isRequired>Project</FormControl.Label>
+          <TextInput
+            value={inputProject}
+            type="text"
+            onChange={handleInput}
+            placeholder="Add new project"
+          ></TextInput>
+          <FormControl.HelpText>
+            Please enter the project name
+          </FormControl.HelpText>
+          <Button variant="primary" type="submit" isDisabled={submitted}>
+            {submitted ? "Submitted" : "Add"}
+          </Button>
+        </FormControl>
+      </Form>
     </div>
   );
 }

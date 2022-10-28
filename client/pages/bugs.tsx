@@ -61,14 +61,10 @@ function BugDetails(): JSX.Element {
             <p>{bug.last_seen} </p>
 
           </ul>
-
         )
- 
       })}
-
     </div >
   )
- 
-}
+ }
 
 export default BugDetails;

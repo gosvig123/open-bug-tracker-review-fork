@@ -40,9 +40,11 @@ const APIprojects = {
       console.log(error);
     }
   },
-  async getProjects() {
+  async getProjects(): Promise<Project[] | undefined> {
     try {
-      return await api.get<Project[]>("/projects");
+      return await (
+        await api.get<Project[]>("/projects")
+      ).data;
     } catch (error) {
       console.log(error);
     }
@@ -157,6 +159,6 @@ const APIBugs = {
 //       return await api.get('')
 //     }
 //   }
-// } 
+// }
 
 export { handler, api, APIprojects, APIBugs };

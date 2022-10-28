@@ -22,7 +22,7 @@ interface Project {
   bugs_count_total: number;
 }
 
-interface Projectwithbugs {
+interface ProjectWithBugs {
   id: number;
   name: string;
   bugs_count_active: number;
@@ -49,10 +49,30 @@ const APIprojects = {
   },
   async getProject(id: string) {
     try {
-      const result = await api.get<Projectwithbugs>(`/project/${id}`);
+      const result = await api.get<ProjectWithBugs>(`/project/${id}`);
       console.log(result);
-      console.log("hi");
       return result;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+};
+
+interface Ocurrences {
+  id: number;
+  projectId: number;
+  bugId: string;
+  message: string;
+  stakTrace: string;
+  metadata: any;
+}
+
+const APIOccurrences = {
+  async ocurrenceDetails(bugId: string, ocurrenceId: string) {
+    try {
+      return await api.get<Ocurrences>(
+        `/bugs/${bugId}/ocurrence/${ocurrenceId}`
+      );
     } catch (error) {
       console.log(error);
     }
@@ -62,21 +82,21 @@ const APIprojects = {
 interface BugAPI {
   id: string;
   message: string;
-  solved_at: null,
-  first_seen: string,
-  last_seen: string,
-  num_occurrences: number,
+  solved_at: null;
+  first_seen: string;
+  last_seen: string;
+  num_occurrences: number;
   occurrences: [
     {
-      report_date: string,
-      stack_trace: string,
+      report_date: string;
+      stack_trace: string;
       meta_data: {
-        user_agent: string,
-        browser: string
-      }
+        user_agent: string;
+        browser: string;
+      };
     }
+  ];
 
-  ]
 }
 
 interface Bug {

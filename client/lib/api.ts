@@ -73,7 +73,7 @@ const APIOccurrences = {
   async ocurrenceDetails(bugId: string, ocurrenceId: string) {
     try {
       return await api.get<Ocurrences>(
-        `/bugs/${bugId}/ocurrence/${ocurrenceId}`
+        `/bugs/${bugId}/occurrence/${ocurrenceId}`
       );
     } catch (error) {
       console.log(error);
@@ -107,6 +107,7 @@ interface Bug {
   solved_at: null,
   first_seen: string,
   last_seen: string
+  occurrences: Object[]
 }
 
 const APIBugs = {
@@ -126,39 +127,10 @@ const APIBugs = {
       console.log(error)
     }
   }
-
-
-  // async bugDetails(): Promise<BugAPI> {
-  //   return new Promise((resolve) => {
-  //     resolve({
-  //       id: "123",
-  //       message: "Unkown variable bananas",
-  //       solved_at: null,
-  //       first_seen: "2022-10-22T16:40:29+0000",
-  //       last_seen: "2022-10-22T16:40:29+0000",
-  //       num_occurrences: 3,
-  //       occurrences: [
-  //         {
-  //           report_date: "2022-10-22T16:40:29+0000",
-  //           stack_trace: "i do not know what stack trace is",
-  //           meta_data: {
-  //             user_agent: '1234',
-  //             browser: 'Safari'
-  //           }
-  //         }
-  //       ]
-  //     })
-  //   })
-  // }
-
 }
 
-// const APIOccurrences() {
-//   async ocurrenceDetails() {
-//     try {
-//       return await api.get('')
-//     }
-//   }
-// }
 
-export { handler, api, APIprojects, APIBugs };
+
+
+
+export { handler, api, APIprojects, APIBugs, APIOccurrences };

@@ -39,7 +39,7 @@ router.put("/bugs/:id/solve", BugsController.updateBug);
 router.get("/projects", ProjectController.getProjects);
 router.get("/project/:id", ProjectController.getProject);
 
-router.get("/bugs/:id/ocurrence/:id", EventsController.getEvent);
+router.get("/bugs/:id/occurrence/:id", EventsController.getEvent);
 
 app.listen(port, () => {
   console.log(`🚀 Server listening ${port} 🍟 🚀`);

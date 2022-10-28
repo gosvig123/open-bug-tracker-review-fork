@@ -58,7 +58,7 @@ const EventsController = {
         project_id: event.project_id,
         bug_id: bug.bug_id,
         message: event.message,
-        stack_trace: event.metadata.stack_trace,
+        stack_trace: event.stack_trace,
         metadata: event.metadata,
       });
 

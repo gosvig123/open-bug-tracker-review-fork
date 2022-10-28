@@ -56,6 +56,12 @@ class Bug {
       bug.solved_at
     );
   }
+
+  //GET ALL BUGS
+  static async getBugs (): Promise <any> {
+    const bugs = await prisma.bugs.findMany()
+    return bugs
+  }
 }
 
 export default Bug;

@@ -13,7 +13,7 @@ import { nextTick } from "process";
 import BugsController from "./controllers/bugs.controller";
 
 const app = new Koa();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 const router = new Router();
 app.use(cors());
@@ -22,13 +22,17 @@ app.use(bodyParser());
 router.post("/events", EventsController.createEvent);
 router.post("/projects", ProjectController.createProject);
 
+router.get("/bugs", BugsController.getBugs)
 router.get("/bugs/:id", BugsController.getBug);
 router.put("/bugs/:id/solve", BugsController.updateBug);
 
 router.get("/projects", ProjectController.getProjects);
 router.get("/project/:id", ProjectController.getProject);
 
+ 
+router.get("/bugs/:id/ocurrence/:id", EventsController.getEvent);
 
+ 
 app.listen(port, () => {
   console.log(`🚀 Server listening ${port} 🍟 🚀`);
 });

@@ -1,4 +1,6 @@
 import Koa from "koa";
+import { ObjectId } from "mongodb";
+
 import { getOccurrencesCollection } from "../lib/mongo";
 import prisma from "../lib/prisma";
 
@@ -62,6 +64,20 @@ const EventsController = {
       });
 
       ctx.status = 202;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  async getEvent(ctx: Koa.Context, next: Koa.Next) {
+    try {
+      const id = ctx.params.id;
+      const occurrences = await getOccurrencesCollection();
+      const result = await occurrences.findOne({
+        _id: new ObjectId(id),
+      });
+
+      ctx.body = result;
     } catch (error) {
       console.log(error);
     }

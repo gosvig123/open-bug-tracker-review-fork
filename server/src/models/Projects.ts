@@ -1,3 +1,4 @@
+import { getOccurrencesCollection } from "../lib/mongo";
 import prisma from "../lib/prisma";
 
 const getActiveBugsOnProject = (project: Project): Promise<number> => {
@@ -12,7 +13,7 @@ const getTotalBugsOnProject = (project: Project): Promise<number> => {
 };
 
 class Project {
-  constructor(public id: number, public name: string) {}
+  constructor(public id: number, public name: string) { }
 
   static async create(projectName: string): Promise<Project> {
     const { id, name } = await prisma.project.create({
@@ -47,6 +48,7 @@ class Project {
       select: {
         bug_id: true,
         message: true,
+        num_occurences: true,
         solved_at: true,
         first_seen: true,
         last_seen: true,
@@ -67,6 +69,33 @@ class Project {
     };
     return projectAssembled;
   }
+
+
+  // static async getBugdetails(id: number, bug_id: string): Promise<any> {
+  //   const project = await prisma.project.findUniqueOrThrow({
+  //     where: {
+  //       id: id
+  //     }
+  //   })
+  //   const bug = await prisma.bugs.findUniqueOrThrow({
+  //     where: {
+  //       bug_id: bug_id
+  //     }
+  //   })
+
+  //   const occurrences = await getOccurrencesCollection()
+  //   const result = await occurrences.find({ bug_id: bug_id }).toArray()
+
+
+  //   const bugDetails = {
+  //     ...project,
+  //     bug,
+  //     result
+  //   }
+
+  //   return bugDetails
+  // }
+
 }
 
 export default Project;

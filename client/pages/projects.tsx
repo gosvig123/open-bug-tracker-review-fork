@@ -22,7 +22,9 @@ function Projects(): JSX.Element {
   const [listProjects, setListProjects] = useState<any>([]);
 
   const getProjects = async function () {
-    const projects = await APIprojects.getProjects();
+    const result = await APIprojects.getProjects();
+    const projects = result?.data;
+
     setListProjects(projects);
   };
 
@@ -41,6 +43,7 @@ function Projects(): JSX.Element {
       <FormProject onSubmit={createProject}> </FormProject>
       <EntityList>
         {listProjects.map((project: Project) => {
+
           return (
             // <EntityList.Item
             //   key={project.id}

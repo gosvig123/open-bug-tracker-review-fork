@@ -47,6 +47,7 @@ class Project {
       select: {
         bug_id: true,
         message: true,
+        num_occurences: true,
         solved_at: true,
         first_seen: true,
         last_seen: true,

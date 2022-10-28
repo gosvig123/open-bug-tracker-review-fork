@@ -76,6 +76,7 @@ const EventsController = {
       const result = await occurrences.findOne({
         _id: new ObjectId(id),
       });
+
       ctx.body = result;
     } catch (error) {
       console.log(error);

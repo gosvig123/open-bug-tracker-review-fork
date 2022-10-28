@@ -16,6 +16,7 @@ function Projects(): JSX.Element {
   const getProjects = async function () {
     const result = await APIprojects.getProjects();
     const projects = result?.data;
+
     setListProjects(projects);
   };
 
@@ -30,11 +31,8 @@ function Projects(): JSX.Element {
   return (
     <div>
       <FormProject onSubmit={createProject}> Hi there </FormProject>
-
-
       {listProjects.map(
         (project: { [x: string]: ReactNode; id: Key | null | undefined }) => {
- 
           return (
             <ul key={project.id}>
               <Link href={`/projects/${project.id}`}>{project.name}</Link>

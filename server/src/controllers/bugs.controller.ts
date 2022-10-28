@@ -58,5 +58,16 @@ const BugsController = {
       occurrences,
     };
   },
+
+
+  // GET ALL BUGS
+  async getBugs(ctx: Koa.Context) {
+    try {
+      const bugs = await Bug.getBugs()
+      ctx.body = bugs
+    } catch (error) {
+      console.log(error)
+    }
+  }
 };
 export default BugsController;

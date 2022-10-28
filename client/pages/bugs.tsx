@@ -40,7 +40,7 @@ function BugDetails(): JSX.Element {
       <Card> solved (not solved){bugDeatails.solved_at}</Card>
       <Card> bug message is {bugDeatails.message}</Card>
       <div>
-        {bugDeatails.occurrences.map((event: { stack_trace: string }) => {
+        {bugDeatails.occurrences?.map((event: { stack_trace: string }) => {
           return (
             <div key={bugDeatails.id}>
               <p> {event.stack_trace}</p>
@@ -55,7 +55,7 @@ function BugDetails(): JSX.Element {
       <p> num_occurrences: {bugDeatails.num_occurrences} </p>
 
       {/* chart  */}
-      {bugDeatails.occurrences.map(
+      {bugDeatails.occurrences?.map(
         (event: {
           report_date: string;
           meta_data: { user_agent: string; browser: string };

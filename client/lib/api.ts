@@ -22,6 +22,14 @@ interface Project {
   bugs_count_total: number;
 }
 
+interface Projectwithbugs {
+  id: number;
+  name: string;
+  bugs_count_active: number;
+  bugs_count_total: number;
+  bugs: any;
+}
+
 const APIprojects = {
   async postProjects(project: string) {
     try {
@@ -41,7 +49,10 @@ const APIprojects = {
   },
   async getProject(id: string) {
     try {
-      return await api.get<Project>(`/project/${id}`);
+      const result = await api.get<Projectwithbugs>(`/project/${id}`);
+      console.log(result);
+      console.log("hi");
+      return result;
     } catch (error) {
       console.log(error);
     }

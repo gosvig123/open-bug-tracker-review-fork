@@ -12,25 +12,25 @@ interface Project {
 
 function Project(): JSX.Element {
   const router = useRouter();
-  useEffect(() => {
-    getProject();
-  }, []);
-
-  const [project, setProject] = useState<any>("");
 
   const id = router.query.id;
+  const [project, setProject] = useState<any>("");
 
-  const getProject = async function () {
+  useEffect(() => {
     if (typeof id !== "string") {
       return;
     }
-    const result = await APIprojects.getProject(id);
-    const project = result?.data;
+    const getProject = async function (id: string) {
+      const result = await APIprojects.getProject(id);
+      const project = result?.data;
+      console.log(result);
+      setProject(project);
+    };
 
-    setProject(project);
-  };
+    getProject(id);
+  }, [id]);
 
-  return <div>{project} </div>;
+  return <div></div>;
 }
 
 export default Project;

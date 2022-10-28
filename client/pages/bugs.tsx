@@ -1,21 +1,40 @@
+ 
 import { Card } from "@contentful/f36-components"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { APIBugs } from "../lib/api"
 
+ 
 
 
 interface Bug {
+ 
   bug_id: string
   message: string
   solved_at: null
   first_seen: string
   last_seen: string
+ 
+  id: string;
+  message: string;
+  solved_at: null;
+  first_seen: string;
+  last_seen: string;
+  occurrences: [
+    {
+      report_date: string;
+      stack_trace: string;
+      meta_data: {
+        user_agent: string;
+        browser: string;
+      };
+    }
+  ];
+ 
 }
 
-
-
 function BugDetails(): JSX.Element {
+ 
   const [listBugs, setListBugs] = useState<any>([])
 
   const getBugs = async function () {
@@ -34,6 +53,7 @@ function BugDetails(): JSX.Element {
   return (
     <div>
       {listBugs.map((bug: Bug) => {
+ 
         return (
           <ul key={bug.bug_id}>
             <Link href={`bugs/${bug.bug_id}`}>{bug.message}</Link>
@@ -43,10 +63,12 @@ function BugDetails(): JSX.Element {
           </ul>
 
         )
+ 
       })}
 
     </div >
   )
+ 
 }
 
-export default BugDetails
+export default BugDetails;

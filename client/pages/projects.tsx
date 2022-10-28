@@ -23,9 +23,7 @@ function Projects(): JSX.Element {
 
   const getProjects = async function () {
     const result = await APIprojects.getProjects();
-    const projects = result?.data;
-
-    setListProjects(projects);
+    setListProjects(result);
   };
 
   const createProject = async function (project: string) {

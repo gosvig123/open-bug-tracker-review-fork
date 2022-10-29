@@ -16,23 +16,31 @@ const app = new Koa();
 const port = process.env.PORT || 8080;
 
 const router = new Router();
-app.use(cors());
+var options = {
+  origin: "*",
+};
+
+app.use(async (ctx, next) => {
+  ctx.set("Access-Control-Allow-Origin", "*");
+  ctx.set("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
+  await next();
+});
+
+app.use(cors(options));
 app.use(bodyParser());
 
 router.post("/events", EventsController.createEvent);
 router.post("/projects", ProjectController.createProject);
 
-router.get("/bugs", BugsController.getBugs)
+router.get("/bugs", BugsController.getBugs);
 router.get("/bugs/:id", BugsController.getBug);
 router.put("/bugs/:id/solve", BugsController.updateBug);
 
 router.get("/projects", ProjectController.getProjects);
 router.get("/project/:id", ProjectController.getProject);
 
- 
-router.get("/bugs/:id/ocurrence/:id", EventsController.getEvent);
+router.get("/bugs/:id/occurrence/:id", EventsController.getEvent);
 
- 
 app.listen(port, () => {
   console.log(`🚀 Server listening ${port} 🍟 🚀`);
 });

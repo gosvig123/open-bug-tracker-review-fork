@@ -4,6 +4,7 @@ import {
   Card,
   EntityList,
   Subheading,
+  Modal,
 } from "@contentful/f36-components";
 import Link from "next/link";
 import { Key, ReactNode, useEffect, useState } from "react";
@@ -30,7 +31,7 @@ function Projects(): JSX.Element {
 
   const createProject = async function (project: string) {
     const result = await APIprojects.postProjects(project);
-    setProjectid(result.data.id);
+    setProjectid(result?.data.id);
     getProjects();
   };
 

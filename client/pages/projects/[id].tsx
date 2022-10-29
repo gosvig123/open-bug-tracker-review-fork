@@ -26,6 +26,7 @@ interface Bug {
   num_occurences: number;
   first_seen: Date;
   last_seen: Date;
+  num_occurrences: number
 }
 
 function Project(): JSX.Element {
@@ -72,7 +73,7 @@ function Project(): JSX.Element {
             </Grid>
             <Grid columns="1fr 1fr 1fr 1fr" alignContent="space-evenly">
               <Text></Text>
-              <Text fontColor="gray500">{bug.num_occurences}</Text>
+              <Text fontColor="gray500">{bug.num_occurrences}</Text>
               <Text fontColor="gray500" fontSize="fontSizeS">
                 <DateTime format="day" date={bug.first_seen} />
               </Text>

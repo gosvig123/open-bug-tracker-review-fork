@@ -27,7 +27,7 @@ export class Test2Stack extends cdk.Stack {
     const processor = new lambda.Function(this, "handler", {
       runtime: lambda.Runtime.NODEJS_14_X,
       code: lambda.Code.fromAsset("../lambda/processor"),
-      handler: "processor.main",
+      handler: "processor.handler",
 
     });
 

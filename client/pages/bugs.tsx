@@ -16,7 +16,7 @@ interface Bug {
 function BugDetails(): JSX.Element {
 
   const [listBugs, setListBugs] = useState<any>([])
- 
+
 
   const getBugs = async function () {
     const result = await APIBugs.getBugs();
@@ -28,12 +28,12 @@ function BugDetails(): JSX.Element {
   useEffect(() => {
     getBugs();
   }, []);
- 
+
 
   return (
     <div>
       {listBugs.map((bug: Bug) => {
- 
+
         return (
           <ul key={bug.bug_id}>
             <Link href={`bugs/${bug.bug_id}`}>{bug.message}</Link>
@@ -42,9 +42,9 @@ function BugDetails(): JSX.Element {
           </ul>
         );
       })}
- 
+
     </div >
   )
- }
- 
+}
+
 export default BugDetails;

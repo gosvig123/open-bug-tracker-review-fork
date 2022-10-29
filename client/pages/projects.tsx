@@ -4,6 +4,7 @@ import {
   Card,
   EntityList,
   Subheading,
+  Modal
 } from "@contentful/f36-components";
 import Link from "next/link";
 import { Key, ReactNode, useEffect, useState } from "react";
@@ -55,7 +56,7 @@ function Projects(): JSX.Element {
               badge={<Badge variant="positive">solved</Badge>}
             >
               <Box padding="spacingS">
-                <Subheading>{project.name}</Subheading>
+                <Subheading>{project.name}  </Subheading>
               </Box>
             </Card>
             //  <Link href={`/projects/${project.id}`}>{project.name}</Link>

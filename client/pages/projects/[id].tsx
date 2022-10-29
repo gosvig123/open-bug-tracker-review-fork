@@ -1,17 +1,15 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { APIprojects } from "../../lib/api";
 import {
   Badge,
   Card,
   Grid,
-  Icon,
   Text,
-  Note,
   SectionHeading,
-  Heading,
   DateTime,
 } from "@contentful/f36-components";
+import styles from "../../styles/ProjectsId.module.css";
 
 interface Project {
   id: number;
@@ -25,6 +23,7 @@ interface Bug {
   bug_id: string;
   message: string;
   solved_at?: Date;
+  num_occurences: number;
   first_seen: Date;
   last_seen: Date;
   num_occurrences: number
@@ -42,35 +41,29 @@ function Project(): JSX.Element {
     }
     const getProject = async function (id: string) {
       const result = await APIprojects.getProject(id);
-      const project = result?.data;
       setProject(project);
-      console.log(project);
     };
 
     getProject(id);
   }, [id]);
 
   return (
-    <div>
-      <Heading>{project.name}</Heading>
-      <SectionHeading>
-        {" "}
-        Bugs count active project {project.bugs_count_active}
-      </SectionHeading>
-      <SectionHeading>
-        {" "}
-        Bugs count total project {project.bugs_count_total}
-      </SectionHeading>
+    <div className={styles.container}>
+      <h2 className={styles.titleProject}>{project.name}</h2>
+      <div className={styles.boxTitles}>
+        <h3 className={styles.titleCount}>
+          active bugs {project.bugs_count_active}
+        </h3>
+        <h3 className={styles.titleCount}>
+          <span> total bugs </span>
+          {project.bugs_count_total}
+        </h3>
+      </div>
       {project.bugs?.map((bug: Bug) => {
         const flag = bug.solved_at ? "Solved" : "To fix";
         const variant = bug.solved_at ? "positive" : "negative";
         return (
-          <Card
-            key={bug.bug_id}
-            as="a"
-            href="https://f36.contentful.com"
-            target="_blank"
-          >
+          <Card key={bug.bug_id} as="a" href={`/bugs/${project.id}`}>
             <SectionHeading>{bug.message}</SectionHeading>
             <Grid columns="1fr 1fr 1fr 1fr" alignContent="space-evenly">
               <Badge variant={variant}>{flag}</Badge>

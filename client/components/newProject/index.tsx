@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styles from "../../styles/Projects.module.css";
 import {
   Form,
   FormControl,
@@ -41,7 +42,7 @@ export default function FormProject({
   };
 
   return (
-    <div>
+    <div className={styles.projectForm}>
       {children}
       <Form onSubmit={handleSubmit}>
         <FormControl>
@@ -50,9 +51,9 @@ export default function FormProject({
             value={inputProject}
             type="text"
             onChange={handleInput}
-            placeholder="Add new project"
+            placeholder="Write new project.."
           ></TextInput>
-          <FormControl.HelpText>
+          <FormControl.HelpText marginTop="spacingXs" marginBottom="spacingXs">
             Please enter the project name
           </FormControl.HelpText>
           <Button variant="primary" type="submit" isDisabled={submitted}>

@@ -9,7 +9,7 @@ import Link from "next/link";
 import { Key, ReactNode, useEffect, useState } from "react";
 import FormProject from "../components/newProject";
 import { APIprojects } from "../lib/api";
-import styles from "../styles/Home.module.css";
+import styles from "../styles/Projects.module.css";
 
 interface Project {
   id: number;
@@ -20,16 +20,17 @@ interface Project {
 
 function Projects(): JSX.Element {
   const [listProjects, setListProjects] = useState<any>([]);
+  const [projectId, setProjectid] = useState("");
 
   const getProjects = async function () {
     const result = await APIprojects.getProjects();
-    const projects = result?.data;
 
-    setListProjects(projects);
+    setListProjects(result);
   };
 
   const createProject = async function (project: string) {
-    await APIprojects.postProjects(project);
+    const result = await APIprojects.postProjects(project);
+    setProjectid(result.data.id);
     getProjects();
   };
 
@@ -39,35 +40,41 @@ function Projects(): JSX.Element {
 
   return (
     <div className={styles.container}>
-      <h1>Projects</h1>
-      <FormProject onSubmit={createProject}> </FormProject>
-      <EntityList>
-        {listProjects.map((project: Project) => {
+      <main className={styles.main}>
+        <h1 className={styles.title}>PROJECTS</h1>
+        <FormProject onSubmit={createProject}> </FormProject>
+        <div className={styles.list}>
+          {listProjects?.map((project: Project) => {
+            return (
+              <Link key={project.id} href={`/projects/${project.id}`}>
+                <div className={styles.element}>
+                  <div className={styles.upBox}>
+                    <h3 className={styles.subTitle}>{project.name}</h3>
 
-          return (
-            // <EntityList.Item
-            //   key={project.id}
-            //   title={project.name}
-            //   description={project.bugs_count_active.toString()}
-            //   contentType="Bug"
-            //   withDragHandle
-            // />
-            <Card
-              key={project.id}
-              badge={<Badge variant="positive">solved</Badge>}
-            >
-              <Box padding="spacingS">
-                <Subheading>{project.name}</Subheading>
-              </Box>
-            </Card>
-            //  <Link href={`/projects/${project.id}`}>{project.name}</Link>
-            // <p>
-            //   {project.bugs_count_active}bugs, {project.bugs_count_total}
-            //   bugs
-            // </p>
-          );
-        })}
-      </EntityList>
+                    {project.bugs_count_active < 1 && (
+                      <div className={styles.solved}> SOLVED</div>
+                    )}
+                    {project.bugs_count_active > 0 && (
+                      <div className={styles.toFix}> TO FIX</div>
+                    )}
+                  </div>
+                  <div className={styles.subBox}>
+                    <div className={styles.idTitle}>
+                      Project id: {project.id}
+                    </div>
+                    <div>
+                      {project.bugs_count_active} active{" "}
+                      {`bug${project.bugs_count_active === 1 ? "" : "s"}`},
+                      total {project.bugs_count_total}{" "}
+                      {`bug${project.bugs_count_total === 1 ? "" : "s"}`}
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+      </main>
     </div>
   );
 }

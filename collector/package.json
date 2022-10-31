@@ -14,6 +14,7 @@
     "cdk": "cdk"
   },
   "devDependencies": {
+    "@types/aws-lambda": "^8.10.108",
     "@types/jest": "^27.5.2",
     "@types/node": "10.17.27",
     "@types/prettier": "2.6.0",
@@ -24,10 +25,10 @@
     "typescript": "~3.9.7"
   },
   "dependencies": {
-    "@aws-cdk/aws-lambda": "^1.179.0",
-    "@aws-cdk/aws-sqs": "^1.179.0",
     "aws-cdk-lib": "2.49.0",
+    "aws-lambda": "^1.0.7",
     "constructs": "^10.0.0",
+    "node-fetch": "^3.2.10",
     "source-map-support": "^0.5.21"
   }
 }

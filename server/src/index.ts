@@ -1,4 +1,4 @@
-import Koa from "koa";
+import Koa, { Context } from "koa";
 import Router from "koa-router";
 import bodyParser from "koa-bodyparser";
 import cors from "@koa/cors";
@@ -9,8 +9,6 @@ dotenv.config();
 
 import EventsController from "./controllers/events.controller";
 import ProjectController from "./controllers/projects.controller";
-import { Context } from "vm";
-import { nextTick } from "process";
 import BugsController from "./controllers/bugs.controller";
 import querystring from "query-string";
 import axios from "axios";
@@ -34,17 +32,34 @@ app.use(async (ctx, next) => {
 app.use(cors(options));
 app.use(bodyParser());
 
-router.post("/events", EventsController.createEvent);
-router.post("/projects", ProjectController.createProject);
+const authRouter = new Router();
+authRouter.use((ctx, next) => {
+  if (ctx.request.headers.authorization) {
+    const token = ctx.request.headers.authorization.split("Bearer ")[1];
+    try {
+      const decoded = jwt.verify(token, JWT_SECRET);
+      ctx.state.user = decoded;
+      return next();
+    } catch (err) {
+      ctx.throw(401, "Invalid token");
+    }
+  }
+  ctx.throw(401, "Invalid token");
+});
 
-router.get("/bugs", BugsController.getBugs);
-router.get("/bugs/:id", BugsController.getBug);
-router.put("/bugs/:id/solve", BugsController.updateBug);
+authRouter.post("/events", EventsController.createEvent);
+authRouter.post("/projects", ProjectController.createProject);
 
-router.get("/projects", ProjectController.getProjects);
-router.get("/project/:id", ProjectController.getProject);
+authRouter.get("/bugs", BugsController.getBugs);
+authRouter.get("/bugs/:id", BugsController.getBug);
+authRouter.put("/bugs/:id/solve", BugsController.updateBug);
 
-router.get("/bugs/:id/occurrence/:id", EventsController.getEvent);
+authRouter.get("/projects", ProjectController.getProjects);
+authRouter.get("/project/:id", ProjectController.getProject);
+
+authRouter.get("/bugs/:id/occurrence/:id", EventsController.getEvent);
+
+router.use(authRouter.routes());
 
 router.get("/login/github", (ctx: Context) => {
   const qs = {
@@ -113,9 +128,8 @@ app.listen(port, () => {
   console.log(`🚀 Server listening ${port} 🍟 🚀`);
 });
 
-app.on("error", async (err, ctx: Koa.Context, next: Koa.Next) => {
-  console.log(err);
-  await next();
+app.on("error", async (err) => {
+  console.error(err);
 });
 
 app.use(router.routes());

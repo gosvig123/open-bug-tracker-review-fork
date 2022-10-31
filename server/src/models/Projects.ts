@@ -15,14 +15,14 @@ const getTotalBugsOnProject = (project: Project): Promise<number> => {
 class Project {
   constructor(public id: number, public name: string) {}
 
-  static async create(projectName: string): Promise<Project> {
+  static async create(projectName: string, user_id: number): Promise<Project> {
     const { id, name } = await prisma.project.create({
       data: {
         name: projectName,
         creator: {
           connect: {
             // TODO: This should be the user that is logged in
-            id: 1,
+            id: user_id,
           },
         },
       },

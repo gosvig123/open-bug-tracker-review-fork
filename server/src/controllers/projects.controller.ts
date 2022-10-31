@@ -8,7 +8,7 @@ const ProjectController = {
       throw new Error("no project name");
     }
 
-    const project = await Project.create(body.name);
+    const project = await Project.create(body.name, ctx.state.user.id);
     ctx.response.body = project;
     ctx.response.status = 201;
   },

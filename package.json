@@ -24,6 +24,7 @@
     "typescript": "~3.9.7"
   },
   "dependencies": {
+    "@auth0/nextjs-auth0": "^1.9.2",
     "@aws-cdk/aws-lambda": "^1.179.0",
     "@aws-cdk/aws-sqs": "^1.179.0",
     "aws-cdk-lib": "2.49.0",

@@ -50,9 +50,9 @@ function Bug(): JSX.Element {
     <div>
 
       <h1> THIS IS BUG DETAILS</h1>
-      <h1> {bugdetails.bug_id} </h1>
+      <h1> {bugdetails?.bug_id} </h1>
       {/* <p> {bugdetails.message} </p> */}
-      <div> {listoccurrences.map((occurrence: Occurrence) => {
+      <div> {listoccurrences?.map((occurrence: Occurrence) => {
         return (
           <ul key={occurrence._id}>
             <Link href={`/bugs/${bugdetails.bug_id}/occurrences/${occurrence._id}`}> here should be the date</Link>

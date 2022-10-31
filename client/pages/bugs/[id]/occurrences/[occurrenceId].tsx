@@ -31,16 +31,7 @@ function Occurrence() {
       <p>{occurrenceDetails.message} </p>
       <p>{occurrenceDetails.project_id} </p>
       <p>{occurrenceDetails.stack_trace} </p>
-
-
     </div>
   )
 }
-
-
-
-
-
-
-
 export default Occurrence

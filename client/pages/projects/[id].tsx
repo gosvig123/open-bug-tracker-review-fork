@@ -41,7 +41,7 @@ function Project(): JSX.Element {
     }
     const getProject = async function (id: string) {
       const result = await APIprojects.getProject(id);
-      setProject(project);
+      setProject(result?.data);
     };
 
     getProject(id);

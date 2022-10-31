@@ -132,5 +132,4 @@ const APIBugs = {
 
 
 
-
 export { handler, api, APIprojects, APIBugs, APIOccurrences };

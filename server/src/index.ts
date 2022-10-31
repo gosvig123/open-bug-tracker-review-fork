@@ -2,7 +2,7 @@ import Koa from "koa";
 import Router from "koa-router";
 import bodyParser from "koa-bodyparser";
 import cors from "@koa/cors";
-import koaConnect from "koa-connect";
+import jwt from "jsonwebtoken";
 
 import dotenv from "dotenv";
 dotenv.config();
@@ -14,6 +14,8 @@ import { nextTick } from "process";
 import BugsController from "./controllers/bugs.controller";
 import querystring from "query-string";
 import axios from "axios";
+import User from "./models/Users";
+import { JWT_SECRET } from "./lib/constants";
 
 const app = new Koa();
 const port = process.env.PORT || 8080;
@@ -75,13 +77,28 @@ router.get("/login/github/authorize", async (ctx: Context) => {
   );
 
   const data = querystring.parse(response.data);
+  if (typeof data.access_token !== "string") {
+    ctx.body = "Invalid access token";
+    ctx.status = 400;
+    return;
+  }
   const accessToken = data.access_token;
+
   const userResponse = await axios.get("https://api.github.com/user", {
     headers: {
       Authorization: `token ${accessToken}`,
     },
   });
-  console.log(userResponse.data);
+
+  // Create USER
+  const user = await User.login(userResponse.data, accessToken);
+
+  // Create JWT
+  const { id, username, email, name, avatarUrl } = user;
+  const token = jwt.sign({ id, username, email, name, avatarUrl }, JWT_SECRET);
+
+  // Redirect to frontend
+  ctx.redirect(`http://localhost:3000?token=${token}`);
 });
 
 // router.get("/health", (ctx: Context) => {

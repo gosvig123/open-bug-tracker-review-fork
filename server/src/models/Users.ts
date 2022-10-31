@@ -1,32 +1,55 @@
-import exp from "constants"
-import prisma from "../lib/prisma"
+import exp from "constants";
+import prisma from "../lib/prisma";
+import Project from "./Projects";
 
+interface GithubUser {
+  id: number;
+  login: string;
+  name: string;
+  avatar_url: string;
+  email: string;
+}
 
 class User {
   constructor(
     public id: number,
     public username: string,
-    public expiresIn: number
-  ) { }
+    public avatarUrl: string,
+    public email: string,
+    public projects: Project[] = [],
+    public name: string | null
+  ) {}
 
-  static async login(githubId: number, accessToken: string, user: string, expiresIn: number): Promise<User> {
-    const { id } = await prisma.user.upsert({
-      where: {
-        id: githubId
-      },
-      update: {
-        github_token: accessToken,
-        github_token_expires: expiresIn
-      },
-      create: {
-        id: githubId,
-        github_token: accessToken,
-        github_token_expires: expiresIn,
-        github_user: user
-      }
-    })
-    return new User(id, user, expiresIn)
+  static async login(
+    githubUser: GithubUser,
+    accessToken: string
+  ): Promise<User> {
+    const { id, github_user, name, avatar_url, email } =
+      await prisma.user.upsert({
+        where: {
+          id: githubUser.id,
+        },
+        update: {
+          github_token: accessToken,
+          name: githubUser.name,
+          avatar_url: githubUser.avatar_url,
+          email: githubUser.email,
+        },
+        create: {
+          id: githubUser.id,
+          github_token: accessToken,
+          github_user: githubUser.login,
+          name: githubUser.name,
+          avatar_url: githubUser.avatar_url,
+          email: githubUser.email,
+        },
+        include: {
+          projects: true,
+        },
+      });
+
+    return new User(id, github_user, avatar_url, email, undefined, name);
   }
 }
 
-export default User
+export default User;

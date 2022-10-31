@@ -38,7 +38,7 @@ model User {
   github_token String
   github_user  String    @unique
   avatar_url   String
-  email        String    @unique
+  email        String?
   projects     Project[]
   name         String?
 }

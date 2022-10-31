@@ -7,7 +7,7 @@ interface GithubUser {
   login: string;
   name: string;
   avatar_url: string;
-  email: string;
+  email: string | null;
 }
 
 class User {
@@ -15,10 +15,10 @@ class User {
     public id: number,
     public username: string,
     public avatarUrl: string,
-    public email: string,
+    public email: string | null,
     public projects: Project[] = [],
     public name: string | null
-  ) {}
+  ) { }
 
   static async login(
     githubUser: GithubUser,

@@ -32,35 +32,6 @@ app.use(async (ctx, next) => {
 app.use(cors(options));
 app.use(bodyParser());
 
-const authRouter = new Router();
-authRouter.use((ctx, next) => {
-  if (ctx.request.headers.authorization) {
-    const token = ctx.request.headers.authorization.split("Bearer ")[1];
-    try {
-      const decoded = jwt.verify(token, JWT_SECRET);
-      ctx.state.user = decoded;
-      return next();
-    } catch (err) {
-      ctx.throw(401, "Invalid token");
-    }
-  }
-  ctx.throw(401, "Invalid token");
-});
-
-authRouter.post("/events", EventsController.createEvent);
-authRouter.post("/projects", ProjectController.createProject);
-
-authRouter.get("/bugs", BugsController.getBugs);
-authRouter.get("/bugs/:id", BugsController.getBug);
-authRouter.put("/bugs/:id/solve", BugsController.updateBug);
-
-authRouter.get("/projects", ProjectController.getProjects);
-authRouter.get("/project/:id", ProjectController.getProject);
-
-authRouter.get("/bugs/:id/occurrence/:id", EventsController.getEvent);
-
-router.use(authRouter.routes());
-
 router.get("/login/github", (ctx: Context) => {
   const qs = {
     client_id: process.env.GITHUB_CLIENT_ID,
@@ -115,6 +86,35 @@ router.get("/login/github/authorize", async (ctx: Context) => {
   // Redirect to frontend
   ctx.redirect(`http://localhost:3000?token=${token}`);
 });
+
+const authRouter = new Router();
+authRouter.use((ctx, next) => {
+  if (ctx.request.headers.authorization) {
+    const token = ctx.request.headers.authorization.split("Bearer ")[1];
+    try {
+      const decoded = jwt.verify(token, JWT_SECRET);
+      ctx.state.user = decoded;
+      return next();
+    } catch (err) {
+      ctx.throw(401, "Invalid token");
+    }
+  }
+  ctx.throw(401, "Invalid token");
+});
+
+authRouter.post("/events", EventsController.createEvent);
+authRouter.post("/projects", ProjectController.createProject);
+
+authRouter.get("/bugs", BugsController.getBugs);
+authRouter.get("/bugs/:id", BugsController.getBug);
+authRouter.put("/bugs/:id/solve", BugsController.updateBug);
+
+authRouter.get("/projects", ProjectController.getProjects);
+authRouter.get("/project/:id", ProjectController.getProject);
+
+authRouter.get("/bugs/:id/occurrence/:id", EventsController.getEvent);
+
+router.use(authRouter.routes());
 
 // router.get("/health", (ctx: Context) => {
 //   ctx.body = ctx.req.oidc.isAuthenticated() ? "Logged in" : "Logged out";

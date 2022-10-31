@@ -47,6 +47,7 @@ function Project(): JSX.Element {
     getProject(id);
   }, [id]);
 
+
   return (
     <div className={styles.container}>
       <h2 className={styles.titleProject}>{project.name}</h2>

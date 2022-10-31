@@ -2,9 +2,34 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import LoginButton from "../components/newProject/LoginButton";
+import { setToken } from "../lib/api";
+import { useUser } from "../lib/auth";
 import styles from "../styles/Home.module.css";
 
+
+
+
 const Home: NextPage = () => {
+
+
+
+
+
+  const router = useRouter();
+  const { token } = router.query;
+
+  const { setToken } = useUser()
+  useEffect(() => {
+    if (typeof token === 'string') {
+      setToken(token)
+      router.push('/', undefined, { shallow: true })
+    }
+  })
+
+
   return (
     <div className={styles.container}>
       <Head>
@@ -13,10 +38,12 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Link href="http://localhost:8080/login/github">
-        <a>Sign in with GitHub</a>
-      </Link>
       <main className={styles.main}>
+
+        <LoginButton href="http://localhost:8080/login/github">Sign in with GitHub</LoginButton>
+
+
+
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>

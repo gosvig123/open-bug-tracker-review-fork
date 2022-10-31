@@ -1,0 +1,121 @@
+.container {
+  justify-content: center;
+  padding: 3rem 6rem;
+}
+
+.upBox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.messageBox {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.titleProject {
+  margin: 0;
+  margin-top: 1rem;
+  font-size: 1rem;
+  text-align: start;
+  line-height: 1.5;
+  letter-spacing: 0.15rem;
+  font-weight: 400;
+}
+
+.titleProject span {
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.infoBox {
+  width: 18rem;
+  border: 1px solid;
+  border-color: rgb(221, 219, 219);
+  border-radius: 6px;
+  padding: 1rem;
+  text-align: start;
+  letter-spacing: 0.05rem;
+  font-weight: 400;
+}
+.infoTitle {
+  text-transform: uppercase;
+  margin: 1rem 0;
+}
+
+.firstSeen {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  line-height: 1.8;
+}
+
+.firstSeenTitle {
+  font-weight: 700;
+}
+
+.date {
+  align-items: flex-end;
+  color: rgb(108, 108, 108);
+}
+
+.lastSeen {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  line-height: 1.8;
+}
+
+.lastSeenTitle {
+  font-weight: 700;
+}
+
+.numOccurrences {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  line-height: 1.8;
+}
+
+.numOccurrencesTitle {
+  font-weight: 700;
+}
+
+.occurrencesTitle {
+  text-transform: uppercase;
+  align-items: flex-start;
+  margin: 0;
+  margin-top: 1rem;
+  font-size: 1rem;
+  text-align: start;
+  line-height: 1.5;
+  letter-spacing: 0.1rem;
+  font-weight: 800;
+}
+.line {
+  height: 1px;
+  background: black;
+}
+
+.grid {
+  line-height: 1;
+  letter-spacing: 0.15rem;
+  font-weight: 400;
+  background-color: rgba(243, 241, 241, 0.917);
+  padding: 1rem 10rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: black;
+}
+
+.card {
+  margin: 0 10rem;
+}

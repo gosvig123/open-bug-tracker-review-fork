@@ -41,6 +41,7 @@
   letter-spacing: 0.05rem;
   font-weight: 400;
 }
+
 .infoTitle {
   text-transform: uppercase;
   margin: 1rem 0;
@@ -86,6 +87,14 @@
   font-weight: 700;
 }
 
+.bottomBox {
+  background-color: brown;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .occurrencesTitle {
   text-transform: uppercase;
   align-items: flex-start;
@@ -99,15 +108,16 @@
 }
 .line {
   height: 1px;
-  background: black;
+  background: rgb(126, 126, 126);
 }
 
-.grid {
-  line-height: 1;
+.gridTitles {
+  font-size: 0.9rem;
+  line-height: 0.15;
   letter-spacing: 0.15rem;
   font-weight: 400;
-  background-color: rgba(243, 241, 241, 0.917);
-  padding: 1rem 10rem;
+  background-color: #f6f6f6;
+  padding: 0.2rem 4rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -116,6 +126,23 @@
   color: black;
 }
 
+.list {
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .card {
-  margin: 0 10rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 4rem;
+  font-weight: 300;
+  font-size: 0.9rem;
+  border-bottom: 0.05rem solid #eaeaea;
+  color: rgb(130, 130, 130);
+}
+
+.card:hover {
+  color: black;
 }

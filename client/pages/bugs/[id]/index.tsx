@@ -24,14 +24,17 @@ interface Occurrence {
 }
 
 interface Metadata {
-  date: Date;
-  userAgent: string;
+  user_agent: string;
+  browser: string;
+  mobile: boolean;
+  platform: string;
   language: string;
 }
 
 function Bug(): JSX.Element {
   const [bugdetails, setBugDetails] = useState<any>({});
   const [listoccurrences, setListOccurrences] = useState<any>([]);
+
   const router = useRouter();
   const id = router.query.id;
 
@@ -46,7 +49,6 @@ function Bug(): JSX.Element {
     const result = await APIBugs.getBug(id);
     const bug = result?.data;
     const occurrences = result?.data.occurrences;
-    console.log("bug", bug);
     setBugDetails(bug);
     setListOccurrences(occurrences);
   }
@@ -87,25 +89,39 @@ function Bug(): JSX.Element {
           </div>
         </div>
       </div>
-      <div className={styles.bottonBox}></div>
+      <div className={styles.bottomBox}></div>
       <h2 className={styles.occurrencesTitle}> Occurrences</h2>
       <div className={styles.line}></div>
-      <div className={styles.grid}>
-        <div className={styles.dateTime}> Date</div>
-        <div className={styles.userAgent}> User Agent</div>
-        <div className={styles.language}> Language</div>
+      <div className={styles.gridTitles}>
+        <h4> User Agent</h4>
+        <h4> Browser</h4>
+        <h4> Mobile</h4>
+        <h4> Platform</h4>
+        <h4> Language</h4>
       </div>
-      <div className={styles.card}>
+      <div className={styles.list}>
         {listoccurrences.map((occurrence: Occurrence) => {
           return (
             <Link
               key={occurrence._id}
               href={`/bugs/${bugdetails.bug_id}/occurrences/${occurrence._id}`}
             >
-              <div className={styles.cardFeatures} key={occurrence._id}>
-                <div> {occurrence.metadata.date}</div>
-                <div> {occurrence.metadata.userAgent}</div>
-                <div> {occurrence.metadata.language}</div>
+              <div className={styles.card}>
+                <div className={styles.user_agent}>
+                  {occurrence.metadata.user_agent}
+                </div>
+                <div className={styles.browser}>
+                  {occurrence.metadata.browser}
+                </div>
+                <div className={styles.mobile}>
+                  {occurrence.metadata.mobile}
+                </div>
+                <div className={styles.platform}>
+                  {occurrence.metadata.platform}
+                </div>
+                <div className={styles.language}>
+                  {occurrence.metadata.language}
+                </div>
               </div>
             </Link>
           );

@@ -60,42 +60,40 @@ function ProjectId(): JSX.Element {
           {project.bugs_count_total}
         </h3>
       </div>
-      <div className={styles.card}>
+      <div className={styles.list}>
         {project.bugs?.map((bug: Bug) => {
           const flag = bug.solved_at ? "Solved" : "To fix";
           const variant = bug.solved_at ? "positive" : "negative";
           return (
             <Link key={project.id} href={`/bugs/${bug.bug_id}`}>
-              <div>
-                <Card key={bug.bug_id} margin="spacingL" as="div">
-                  {" "}
-                  <SectionHeading>{bug.message}</SectionHeading>
-                  <Grid
-                    columns="0.70fr 0.6fr  1fr 1fr 1fr"
-                    alignContent="space-evenly"
-                  >
-                    <Badge variant={variant}>{flag}</Badge>
-                    <Text></Text>
-                    <Text>Ocurrences</Text>
-                    <Text>First seen</Text>
-                    <Text>Last seen</Text>
-                  </Grid>
-                  <Grid
-                    columns=" 0.70fr 0.6fr  1fr 1fr 1fr"
-                    alignContent="space-evenly"
-                  >
-                    <Text></Text>
-                    <Text></Text>
-                    <Text fontColor="gray500">{bug.num_occurences}</Text>
-                    <Text fontColor="gray500" fontSize="fontSizeS">
-                      <DateTime format="day" date={bug.first_seen} />
-                    </Text>
-                    <Text fontColor="gray500" fontSize="fontSizeS">
-                      <DateTime format="day" date={bug.last_seen} />
-                    </Text>
-                  </Grid>
-                </Card>
-              </div>
+              <Card key={bug.bug_id} margin="spacingXl">
+                {" "}
+                <SectionHeading>{bug.message}</SectionHeading>
+                <Grid
+                  columns="0.70fr 0.6fr  1fr 1fr 1fr"
+                  alignContent="space-evenly"
+                >
+                  <Badge variant={variant}>{flag}</Badge>
+                  <Text></Text>
+                  <Text>Ocurrences</Text>
+                  <Text>First seen</Text>
+                  <Text>Last seen</Text>
+                </Grid>
+                <Grid
+                  columns=" 0.70fr 0.6fr  1fr 1fr 1fr"
+                  alignContent="space-evenly"
+                >
+                  <Text></Text>
+                  <Text></Text>
+                  <Text fontColor="gray500">{bug.num_occurences}</Text>
+                  <Text fontColor="gray500" fontSize="fontSizeS">
+                    <DateTime format="day" date={bug.first_seen} />
+                  </Text>
+                  <Text fontColor="gray500" fontSize="fontSizeS">
+                    <DateTime format="day" date={bug.last_seen} />
+                  </Text>
+                </Grid>
+              </Card>
             </Link>
           );
         })}

@@ -3,6 +3,7 @@ import * as sqs from "aws-cdk-lib/aws-sqs";
 import * as lambda from "aws-cdk-lib/aws-lambda";
 import * as apigateway from "aws-cdk-lib/aws-apigateway";
 import * as iam from "aws-cdk-lib/aws-iam";
+import * as dynamodb from "aws-cdk-lib/aws-dynamodb";
 import { SqsEventSource } from "aws-cdk-lib/aws-lambda-event-sources";
 
 export class BugTrackerStack extends cdk.Stack {
@@ -64,5 +65,19 @@ export class BugTrackerStack extends cdk.Stack {
     new cdk.CfnOutput(this, "EventsEndpoint", {
       value: `${api.url.slice(0, -1)}${eventsEndpoint.path}`,
     });
+
+    // DYANAMO
+    const table = new dynamodb.Table(this, id, {
+      billingMode: dynamodb.BillingMode.PROVISIONED,
+      readCapacity: 1,
+      writeCapacity: 1,
+      removalPolicy: cdk.RemovalPolicy.DESTROY,
+      partitionKey: { name: "id", type: dynamodb.AttributeType.STRING },
+      sortKey: { name: "createdAt", type: dynamodb.AttributeType.NUMBER },
+      pointInTimeRecovery: true,
+    });
+
+    console.log("table name ", table.tableName);
+    console.log("table arn ", table.tableArn);
   }
 }

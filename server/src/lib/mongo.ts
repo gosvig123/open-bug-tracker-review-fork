@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 
-const url = process.env.MONGO_URL;
+const url = process.env.MONGO_URL_PRODUCTION;
 
 if (typeof url === "undefined") {
   throw new Error("MONGO_URL not available in environment");

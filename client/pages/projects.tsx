@@ -26,23 +26,7 @@ function Projects(): JSX.Element {
   const [listProjects, setListProjects] = useState<any>([]);
   const [projectId, setProjectid] = useState("");
 
-
-
-  // const router = useRouter();
-  // const { token } = router.query;
-
   useUser()
-  // useEffect(() => {
-  //   if (typeof token === 'string') {
-  //     console.log('whats going on here')
-  //     setToken(token)
-  //     // Notification.setPlacement('top')
-  //     // Notification.success('You are successfully logged in. You can now create a new project or explore an existing one.')
-  //     // Notification.setDuration(100000)
-  //     router.push('/', undefined, { shallow: true })
-  //   }
-  // }, [token])
-
 
   const getProjects = async function () {
     const result = await APIprojects.getProjects();

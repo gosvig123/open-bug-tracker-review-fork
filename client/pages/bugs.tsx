@@ -2,6 +2,7 @@ import { Card } from "@contentful/f36-components";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { APIBugs } from "../lib/api";
+import { useUser } from "../lib/auth";
 
 interface Bug {
   bug_id: string;
@@ -14,6 +15,8 @@ interface Bug {
 function BugDetails(): JSX.Element {
   const [listBugs, setListBugs] = useState<any>([]);
 
+
+  useUser()
   const getBugs = async function () {
     const result = await APIBugs.getBugs();
     if (result !== undefined) {

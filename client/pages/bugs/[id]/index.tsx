@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { APIBugs } from "../../../lib/api";
+import { useUser } from "../../../lib/auth";
 
 
 interface Bug {
@@ -30,6 +31,7 @@ function Bug(): JSX.Element {
   const [listoccurrences, setListOccurrences] = useState<any>([])
   const router = useRouter()
   const id = router.query.id
+  useUser()
 
   useEffect(() => {
     getBug()

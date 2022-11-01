@@ -7,10 +7,13 @@ import {
   Modal,
 } from "@contentful/f36-components";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { Key, ReactNode, useEffect, useState } from "react";
 import FormProject from "../components/newProject";
 import { APIprojects } from "../lib/api";
+import { useUser } from "../lib/auth";
 import styles from "../styles/Projects.module.css";
+
 
 interface Project {
   id: number;
@@ -22,6 +25,24 @@ interface Project {
 function Projects(): JSX.Element {
   const [listProjects, setListProjects] = useState<any>([]);
   const [projectId, setProjectid] = useState("");
+
+
+
+  // const router = useRouter();
+  // const { token } = router.query;
+
+  useUser()
+  // useEffect(() => {
+  //   if (typeof token === 'string') {
+  //     console.log('whats going on here')
+  //     setToken(token)
+  //     // Notification.setPlacement('top')
+  //     // Notification.success('You are successfully logged in. You can now create a new project or explore an existing one.')
+  //     // Notification.setDuration(100000)
+  //     router.push('/', undefined, { shallow: true })
+  //   }
+  // }, [token])
+
 
   const getProjects = async function () {
     const result = await APIprojects.getProjects();

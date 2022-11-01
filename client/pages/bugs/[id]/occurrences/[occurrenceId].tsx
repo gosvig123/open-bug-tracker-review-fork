@@ -1,12 +1,14 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { APIOccurrences } from "../../../../lib/api";
+import { useUser } from "../../../../lib/auth";
+
 
 function Occurrence() {
   const [occurrenceDetails, setOccurrenceDetails] = useState<any>({})
   const router = useRouter()
   const { id: bugId, occurrenceId } = router.query
-
+  useUser()
 
   useEffect(() => {
     getOccurrence()

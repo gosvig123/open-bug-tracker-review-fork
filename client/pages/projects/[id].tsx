@@ -10,6 +10,8 @@ import {
   DateTime,
 } from "@contentful/f36-components";
 import styles from "../../styles/ProjectsId.module.css";
+import { useUser } from "../../lib/auth";
+
 
 interface Project {
   id: number;
@@ -31,6 +33,7 @@ interface Bug {
 
 function Project(): JSX.Element {
   const router = useRouter();
+  useUser()
 
   const id = router.query.id;
   const [project, setProject] = useState<any>("");

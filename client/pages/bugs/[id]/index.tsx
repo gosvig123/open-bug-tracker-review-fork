@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { APIBugs } from "../../../lib/api";
+import { useUser } from "../../../lib/auth";
 import styles from "../../../styles/BugsId.module.css";
 import { Badge, DateTime } from "@contentful/f36-components";
 
@@ -35,8 +36,9 @@ function Bug(): JSX.Element {
   const [bugdetails, setBugDetails] = useState<any>({});
   const [listoccurrences, setListOccurrences] = useState<any>([]);
 
-  const router = useRouter();
-  const id = router.query.id;
+  const router = useRouter()
+  const id = router.query.id
+  useUser()
 
   useEffect(() => {
     getBug();

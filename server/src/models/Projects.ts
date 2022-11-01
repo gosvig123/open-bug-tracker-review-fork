@@ -13,12 +13,18 @@ const getTotalBugsOnProject = (project: Project): Promise<number> => {
 };
 
 class Project {
-  constructor(public id: number, public name: string) { }
+  constructor(public id: number, public name: string) {}
 
-  static async create(projectName: string): Promise<Project> {
+  static async create(projectName: string, user_id: number): Promise<Project> {
     const { id, name } = await prisma.project.create({
       data: {
         name: projectName,
+        creator: {
+          connect: {
+            // TODO: This should be the user that is logged in
+            id: user_id,
+          },
+        },
       },
     });
     return new Project(id, name);
@@ -70,7 +76,6 @@ class Project {
     return projectAssembled;
   }
 
-
   // static async getBugdetails(id: number, bug_id: string): Promise<any> {
   //   const project = await prisma.project.findUniqueOrThrow({
   //     where: {
@@ -86,7 +91,6 @@ class Project {
   //   const occurrences = await getOccurrencesCollection()
   //   const result = await occurrences.find({ bug_id: bug_id }).toArray()
 
-
   //   const bugDetails = {
   //     ...project,
   //     bug,
@@ -95,7 +99,6 @@ class Project {
 
   //   return bugDetails
   // }
-
 }
 
 export default Project;

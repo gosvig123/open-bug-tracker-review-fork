@@ -129,8 +129,12 @@ const APIBugs = {
   }
 }
 
+const setToken = function (token: string): void {
+  api.defaults.headers.common["Authorization"] = `Bearer ${token}`
+
+}
 
 
 
 
-export { handler, api, APIprojects, APIBugs, APIOccurrences };
+export { handler, api, APIprojects, APIBugs, APIOccurrences, setToken };

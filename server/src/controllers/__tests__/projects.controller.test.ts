@@ -11,22 +11,22 @@ function createMockNext() {
 }
 
 describe("createProject", () => {
-  test("create simple project", async () => {
-    const projectName = "Alan Parson's";
-    const ctx = createMockContext({ requestBody: { name: projectName } });
-    const next = createMockNext();
+  // test("create simple project", async () => {
+  //   const projectName = "Alan Parson's";
+  //   const ctx = createMockContext({ requestBody: { name: projectName } });
+  //   const next = createMockNext();
 
-    const responseBody = { id: 123, name: projectName };
-    const spy = jest.spyOn(Project, "create");
-    spy.mockResolvedValueOnce(responseBody);
+  //   const responseBody = { id: 123, name: projectName };
+  //   const spy = jest.spyOn(Project, "create");
+  //   spy.mockResolvedValueOnce(responseBody);
 
-    await ProjectController.createProject(ctx, next);
+  //   await ProjectController.createProject(ctx, next);
 
-    // expect(spy).toHaveBeenCalledTimes(1);
-    // expect(spy).toHaveBeenCalledWith(projectName);
-    // expect(ctx.response.body).toEqual(responseBody);
-    // expect(ctx.response.status).toEqual(201);
-  });
+  //   // expect(spy).toHaveBeenCalledTimes(1);
+  //   // expect(spy).toHaveBeenCalledWith(projectName);
+  //   // expect(ctx.response.body).toEqual(responseBody);
+  //   // expect(ctx.response.status).toEqual(201);
+  // });
 
   test("do not create project without name", async () => {
     try {

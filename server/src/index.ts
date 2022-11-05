@@ -102,7 +102,7 @@ authRouter.use((ctx, next) => {
   ctx.throw(401, "Invalid token");
 });
 
-authRouter.post("/events", EventsController.createEvent);
+router.post("/events", EventsController.createEvent);
 authRouter.post("/projects", ProjectController.createProject);
 
 authRouter.get("/bugs", BugsController.getBugs);

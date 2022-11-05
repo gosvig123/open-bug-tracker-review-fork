@@ -1,6 +1,6 @@
-import { config } from "./listener";
+import { Bugtracker } from "./listener";
 
-export { config };
+export { Bugtracker };
 
 // ESmodules import { config } from 'lib'
 // Commonjs import * as bugtracker from 'lib'

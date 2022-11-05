@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { Notification } from "@contentful/f36-components";
 import type { NextPage } from "next";
 import Head from "next/head";
@@ -7,30 +8,23 @@ import LoginButton from "../components/newProject/LoginButton";
 import { useUser } from "../lib/auth";
 import styles from "../styles/Home.module.css";
 
-
-
-
 const Home: NextPage = () => {
-
-
-
-
-
   const router = useRouter();
   const { token } = router.query;
 
-  const { setToken } = useUser()
+  const { setToken } = useUser();
   useEffect(() => {
-    if (typeof token === 'string') {
-      console.log('whats going on here')
-      setToken(token)
-      Notification.setPlacement('top')
-      Notification.success('You are successfully logged in. You can now create a new project or explore an existing one.')
-      Notification.setDuration(100000)
-      router.push('/', undefined, { shallow: true })
+    if (typeof token === "string") {
+      console.log("whats going on here");
+      setToken(token);
+      Notification.setPlacement("top");
+      Notification.success(
+        "You are successfully logged in. You can now create a new project or explore an existing one."
+      );
+      Notification.setDuration(100000);
+      router.push("/", undefined, { shallow: true });
     }
-  }, [token])
-
+  }, [router, setToken, token]);
 
   return (
     <div className={styles.container}>
@@ -41,33 +35,28 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-
-
-
-
-        <h1 className={styles.title}>
-          Welcome to the Bug Tracker
-        </h1>
+        <h1 className={styles.title}>Welcome to the Bug Tracker</h1>
 
         <h1>Don't just track errors, continuosly improve your app </h1>
 
-
-
         <p className={styles.description}>
           Follow these easy steps to begin tracking
-
-
         </p>
 
         <div className={styles.grid}>
           <a href="http://localhost:8080/login/github" className={styles.card}>
             <h2>1. Login with GitHub &rarr;</h2>
-            <p>We made it easy. You only need to login using your GitHub account.</p>
+            <p>
+              We made it easy. You only need to login using your GitHub account.
+            </p>
           </a>
 
           <a href="http://localhost:3000/projects" className={styles.card}>
             <h2>2. Create a project &rarr;</h2>
-            <p>Only authorized users can create a project. Please make sure you didn't skip Step 1</p>
+            <p>
+              Only authorized users can create a project. Please make sure you
+              didn\'t skip Step 1
+            </p>
           </a>
 
           <a
@@ -77,26 +66,30 @@ const Home: NextPage = () => {
             <h2>3. Install the package &rarr;</h2>
             <p> in your app.js </p>
             <p>
-
-              <code className={styles.code}>npm install bug-tracker / yarn add bug-tracker</code>
+              <code className={styles.code}>
+                npm install open-bug-tracker / yarn add open-bug-tracker
+              </code>
             </p>
             <p>
-
-              <code className={styles.code}>import bug - tracker from 'bug-tracker' </code>
+              <code className={styles.code}>
+                import Bugtracker from 'open-bug-tracker'
+              </code>
             </p>
-
-          </a>
-
-          <a
-            href="http://localhost:3000/projects"
-            className={styles.card}
-          >
-            <h2>4. Run the package in your app and explore the errors &rarr;</h2>
+            <p> Add your project_id to the config </p>
             <p>
-              Go to my projects
+              <code className={styles.code}>Bugtracker.config(project_id)</code>
             </p>
           </a>
-          <LoginButton href="http://localhost:8080/login/github">Sign in with GitHub</LoginButton>
+
+          <a href="http://localhost:3000/projects" className={styles.card}>
+            <h2>
+              4. Run the package in your app and explore the errors &rarr;
+            </h2>
+            <p>Go to my projects</p>
+          </a>
+          <LoginButton href="http://localhost:8080/login/github">
+            Sign in with GitHub
+          </LoginButton>
         </div>
       </main>
 
@@ -105,8 +98,7 @@ const Home: NextPage = () => {
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
           target="_blank"
           rel="noopener noreferrer"
-        >
-        </a>
+        ></a>
       </footer>
     </div>
   );
